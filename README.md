@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/logo-light.svg">
+    <img src="apps/web/public/logo.svg" alt="Email Host logo" width="112" height="112">
+  </picture>
+</p>
+
 # Email Host
 
 Your existing mailboxes in one web app. Run Email Host on your server, connect IMAP/SMTP accounts, and read, search, and send mail from a browser or PWA.

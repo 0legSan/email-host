@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../apps/web/public/logo-light.svg">
+    <img src="../../apps/web/public/logo.svg" alt="Логотип Email Host" width="112" height="112">
+  </picture>
+</p>
+
 # Email Host
 
 Все существующие почтовые ящики в одном веб-приложении. Установите Email Host на своём сервере, подключите IMAP/SMTP-аккаунты и читайте, ищите и отправляйте письма через браузер или PWA.
