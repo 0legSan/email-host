@@ -4,7 +4,7 @@ Please report vulnerabilities privately through [GitHub security advisories](htt
 
 Do not post credentials, session tokens, email contents, or an exploitable vulnerability in a public issue. Include the affected version, deployment mode, expected behavior, and minimal reproduction with fictional data. A response time is not guaranteed.
 
-Until a first supported release is published, this repository is development software. A successful build does not establish that a deployment is safe for storing other people's mail.
+The current stable application release is `0.1.0`. Report the exact installed release and keep the [installation verification scope](docs/installation.md) in mind. A successful build alone does not establish the security of a deployment or its readiness for storing other people's mail.
 
 ## Deployment responsibilities
 
