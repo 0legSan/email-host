@@ -1,15 +1,32 @@
-# Screenshot sources
+# Screenshots
 
-These PNGs were captured on 11 November 2026 from the actual Email Host demo at `/demo/`, using the repository's local site server and Ego Browser. No image generation or interface compositing was used.
+The Email Host interface on desktop and mobile. All messages and addresses are fictional demo data. Click an image to view it at full size, or [try the demo](https://emailhost.olegsan.tech/demo/?lang=en).
 
-| File                  | View                                               | Language | CSS viewport |
-| --------------------- | -------------------------------------------------- | -------- | ------------ |
-| `inbox-desktop.png`   | Unified inbox and open sample message, light theme | English  | 1440 × 960   |
-| `compose-dark.png`    | Compose window with a fictional draft, dark theme  | English  | 1440 × 960   |
-| `inbox-mobile-ru.png` | Inbox, light theme                                 | Russian  | 390 × 844    |
+## Inbox · light theme
 
-All messages and addresses come from the fictional demo, with reserved example domains. The compose image includes a short synthetic draft written for this screenshot. It was not sent. The demo notice remains visible. No real inbox, credentials, cookies or server settings are shown.
+Mailboxes in one list, with a message open alongside it.
 
-To reproduce a view, run `bun run --cwd apps/site dev`, open `/demo/?lang=en` or `/demo/?lang=ru`, and use the demo's theme and language controls. Its reset action clears demo mail data. Wait for responsive layout transitions to finish before capturing a mobile viewport.
+![Email Host unified inbox and message reader in the light theme](inbox-desktop.png)
 
-These screenshots are project documentation assets under the repository's [MIT license](../../LICENSE). They do not change licenses of third-party software shown or included in the distribution.
+## Compose · dark theme
+
+Writing a message in the dark theme. The demo simulates sending.
+
+![Email Host message composer in the dark theme](compose-dark.png)
+
+## Mobile · Russian interface
+
+The inbox on a narrow screen.
+
+<a href="inbox-mobile-ru.png"><img src="inbox-mobile-ru.png" alt="Email Host mobile inbox in Russian, light theme" width="320"></a>
+
+<details>
+<summary>Capture details and reproduction</summary>
+
+Captured from the running demo on 11 November 2026. Desktop views use a 1440 × 960 CSS viewport; the mobile view uses 390 × 844. These are screenshots of the application, without generated or composited interface elements. No real mailbox or credentials are shown.
+
+Run `bun run --cwd apps/site dev`, then open `/demo/?lang=en` or `/demo/?lang=ru`. Choose the theme and language in the demo controls. Wait for layout transitions to finish before capturing a mobile view.
+
+The screenshots are documentation assets under the repository's [MIT license](../../LICENSE). Third-party software retains its own licenses.
+
+</details>

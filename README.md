@@ -63,7 +63,7 @@ The [public demo](https://emailhost.olegsan.tech/demo/?lang=en) needs no account
 
 ![A fictional message being composed in the dark theme, with the demo notice visible](docs/images/compose-dark.png)
 
-The [Russian overview](docs/public/README.ru.md) also shows the mobile layout. [Screenshot sources](docs/images/README.md) describe how these images were captured.
+See the [screenshot gallery](docs/images/README.md) for desktop and mobile views, or read the [Russian overview](docs/public/README.ru.md).
 
 ## For contributors and coding agents
 
