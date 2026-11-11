@@ -1,0 +1,14 @@
+# Project glossary
+
+These definitions describe the existing UI and data behavior. English names and the original Russian terms refer to the same concepts.
+
+| Term                                                   | Meaning                                                                                                                                                                                                                        | Main code                                     |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------- |
+| Settings, "Настройки"                                  | A separate application page for accounts, profiles, signatures, users, appearance, offline access and application options. Returning keeps the current mail context. Original phrasing: "настройки в виде отдельной страницы". | `apps/web/src/components/settings-panel.tsx`  |
+| Saved message content, "Сохранённое содержимое письма" | Downloaded text and HTML with `loaded` status in the local browser database. A saved list row alone does not mean the message can be read offline.                                                                             | `apps/web/src/lib/offline-mail-cache.ts`      |
+| Read state, "Состояние прочтения письма"               | The canonical message `seen` flag. Every folder/Gmail-label representation mirrors it, and each folder's unread counter counts that message once.                                                                              | `packages/mail-agent/src` and `convex`        |
+| Accent color, "Акцентный цвет"                         | The user's color for primary actions and active UI elements. Presets and RGB HEX are supported. This does not replace semantic error/warning colors.                                                                           | `packages/mail-design/src`, `packages/ui/src` |
+| UI language, "Язык интерфейса"                         | Russian or English for application elements. Real mail, drafts and user-created names are not translated. In the demo, only unchanged sample content is translated.                                                            | `packages/mail-design/src/i18n`               |
+| Service preheader filler, "Служебный preheader filler" | Invisible HTML entities and whitespace added by a sender after hidden preview text. This differs from visible message text and should not appear in snippets or Web Push.                                                      | `packages/mail-agent/src/mail-content.ts`     |
+
+When adding a concept, distinguish a proposed definition from an agreed one. Do not rename unrelated code to match terminology during another task.

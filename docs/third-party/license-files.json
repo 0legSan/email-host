@@ -1,0 +1,46 @@
+[
+  {
+    "file": "CONVEX-LICENSE.md",
+    "source": "https://raw.githubusercontent.com/get-convex/convex-backend/19431ea0dd90bc55ae58dbbd06d9aa045f97336f/LICENSE.md",
+    "sha256": "563cea54ba1ad9d2a1b36f4a62b1ebdc3e1dcfb8776a7afee06c99aad5294588"
+  },
+  {
+    "file": "MPL-2.0.txt",
+    "source": "https://www.mozilla.org/media/MPL/2.0/index.txt",
+    "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+  },
+  {
+    "file": "CADDY-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/caddyserver/caddy/v2.10.2/LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "file": "POSTGRESQL-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/postgres/postgres/REL_17_10/COPYRIGHT",
+    "sha256": "3d6af92ff8a4c2cdf69afb1cf44edea727922f5cd0cf8b5f72b11cdecac8fdfd"
+  },
+  {
+    "file": "NGINX-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/nginx/nginx/release-1.30.6/LICENSE",
+    "sha256": "08845fe39e06b51dad7685c28140ab49577a86e947523e16b536a46caf89ad5c"
+  },
+  {
+    "file": "BUN-LICENSE.md",
+    "source": "https://raw.githubusercontent.com/oven-sh/bun/bun-v1.3.5/LICENSE.md",
+    "sha256": "4cf82fd717b2b34dfabf6087c35fcffd28386054f1791d2e6ecfdfcafe0131a8"
+  },
+  {
+    "file": "NOTO-SANS-OFL.txt",
+    "package": "@fontsource-variable/noto-sans",
+    "version": "5.2.10",
+    "source": "https://github.com/fontsource/font-files/tree/main/fonts/variable/noto-sans",
+    "sha256": "54ec7b5a35310ad66f9f3091426f7028484cbf9ae1ab5da30122ee412a3009e1"
+  },
+  {
+    "file": "NUNITO-SANS-OFL.txt",
+    "package": "@fontsource-variable/nunito-sans",
+    "version": "5.2.7",
+    "source": "https://github.com/fontsource/font-files/tree/main/fonts/variable/nunito-sans",
+    "sha256": "6632e6c45fcc18cc03909a0a53d84e9775185e06203ff80d6367cf93959b91a8"
+  }
+]

@@ -1,0 +1,433 @@
+[
+  {
+    "packages": [
+      {
+        "name": "@esbuild/linux-arm64",
+        "version": "0.27.0",
+        "license": "MIT"
+      },
+      {
+        "name": "@esbuild/linux-x64",
+        "version": "0.27.0",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@esbuild%2Flinux-x64/0.27.0"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/evanw/esbuild/2b91699b74da07c2cd2361a5e63c1882575e3bf0/LICENSE.md",
+    "noticeSha256": "b40ec5baec7bb34fa5b1c09521fa3cd52d5fad7adafed74932a2010d3612a681"
+  },
+  {
+    "packages": [
+      {
+        "name": "@esbuild/linux-arm64",
+        "version": "0.28.1",
+        "license": "MIT"
+      },
+      {
+        "name": "@esbuild/linux-x64",
+        "version": "0.28.1",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@esbuild%2Flinux-x64/0.28.1"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/evanw/esbuild/bb9db84c02433fbe37b3509f53f9f3e3cc48725e/LICENSE.md",
+    "noticeSha256": "b40ec5baec7bb34fa5b1c09521fa3cd52d5fad7adafed74932a2010d3612a681"
+  },
+  {
+    "packages": [
+      {
+        "name": "@humanfs/types",
+        "version": "0.15.0",
+        "license": "Apache-2.0"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/humanwhocodes/humanfs/85069f193cbacc371c3beb649ce746f8c5a493be/packages/types/README.md",
+    "noticeSha256": "ed3085cb2b3f7e3689c3d453d9a48ce6b4b7572d574c7c9852433c657fd036e5"
+  },
+  {
+    "packages": [
+      {
+        "name": "@img/sharp-libvips-linux-arm64",
+        "version": "1.3.2",
+        "license": "LGPL-3.0-or-later"
+      },
+      {
+        "name": "@img/sharp-libvips-linuxmusl-arm64",
+        "version": "1.3.2",
+        "license": "LGPL-3.0-or-later"
+      }
+    ],
+    "classification": "build-only, not copied into final web runtime",
+    "source": "https://github.com/lovell/sharp-libvips/tree/4da6d14c0d59866adfb9d8cf52bcaa53846dc4f6",
+    "note": "The wrapper repository Apache license is not a replacement for libvips LGPL terms. Native build dependencies remain in discarded build stage."
+  },
+  {
+    "packages": [
+      {
+        "name": "@react-dnd/invariant",
+        "version": "4.0.2",
+        "license": "MIT"
+      },
+      {
+        "name": "@react-dnd/shallowequal",
+        "version": "4.0.2",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/react-dnd/react-dnd/641fd36c130e42c3cf08987924151efa1452bca7/LICENSE",
+    "noticeSha256": "10c8da64ecfa3067cf9231e0ba19b8d7730e7fed3ac5eaa37ccb97c3c5e71336"
+  },
+  {
+    "packages": [
+      {
+        "name": "@rolldown/binding-linux-arm64-gnu",
+        "version": "1.1.3",
+        "license": "MIT"
+      },
+      {
+        "name": "@rolldown/binding-linux-arm64-musl",
+        "version": "1.1.3",
+        "license": "MIT"
+      },
+      {
+        "name": "@rolldown/binding-linux-x64-gnu",
+        "version": "1.1.3",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rolldown%2Fbinding-linux-x64-gnu/1.1.3"
+      },
+      {
+        "name": "@rolldown/binding-linux-x64-musl",
+        "version": "1.1.3",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rolldown%2Fbinding-linux-x64-musl/1.1.3"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/rolldown/rolldown/e77f7c792d718c92cb066a79b72a9dc1e9e910d4/LICENSE",
+    "noticeSha256": "23ecfff35a5a2e80d92142f75228912c3b1abc4b5a8337a821ff4397e2f9f734"
+  },
+  {
+    "packages": [
+      {
+        "name": "@rolldown/binding-linux-arm64-gnu",
+        "version": "1.2.8",
+        "license": "MIT"
+      },
+      {
+        "name": "@rolldown/binding-linux-arm64-musl",
+        "version": "1.2.8",
+        "license": "MIT"
+      },
+      {
+        "name": "@rolldown/binding-linux-x64-gnu",
+        "version": "1.2.8",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rolldown%2Fbinding-linux-x64-gnu/1.2.8"
+      },
+      {
+        "name": "@rolldown/binding-linux-x64-musl",
+        "version": "1.2.8",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rolldown%2Fbinding-linux-x64-musl/1.2.8"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/rolldown/rolldown/v1.2.8/LICENSE",
+    "noticeSha256": "23ecfff35a5a2e80d92142f75228912c3b1abc4b5a8337a821ff4397e2f9f734"
+  },
+  {
+    "packages": [
+      {
+        "name": "@rollup/rollup-linux-arm64-gnu",
+        "version": "4.62.2",
+        "license": "MIT"
+      },
+      {
+        "name": "@rollup/rollup-linux-arm64-musl",
+        "version": "4.62.2",
+        "license": "MIT"
+      },
+      {
+        "name": "@rollup/rollup-linux-x64-gnu",
+        "version": "4.62.2",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rollup%2Frollup-linux-x64-gnu/4.62.2"
+      },
+      {
+        "name": "@rollup/rollup-linux-x64-musl",
+        "version": "4.62.2",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rollup%2Frollup-linux-x64-musl/4.62.2"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/rollup/rollup/8faa18777374582bb813d54ce3623f4acf1f9e0b/LICENSE.md",
+    "noticeSha256": "fa1bd040c5bdeefe65b3821cebf474f2733ce65df13089bd151dda1778e62fe8"
+  },
+  {
+    "packages": [
+      {
+        "name": "@rollup/rollup-linux-arm64-gnu",
+        "version": "4.63.3",
+        "license": "MIT"
+      },
+      {
+        "name": "@rollup/rollup-linux-arm64-musl",
+        "version": "4.63.3",
+        "license": "MIT"
+      },
+      {
+        "name": "@rollup/rollup-linux-x64-gnu",
+        "version": "4.63.3",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rollup%2Frollup-linux-x64-gnu/4.63.3"
+      },
+      {
+        "name": "@rollup/rollup-linux-x64-musl",
+        "version": "4.63.3",
+        "license": "MIT",
+        "metadataUrl": "https://registry.npmjs.org/@rollup%2Frollup-linux-x64-musl/4.63.3"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/rollup/rollup/250deca2945f8817350564f7d52bab0f79175d1b/LICENSE.md",
+    "noticeSha256": "fa1bd040c5bdeefe65b3821cebf474f2733ce65df13089bd151dda1778e62fe8"
+  },
+  {
+    "packages": [
+      {
+        "name": "@udecode/react-hotkeys",
+        "version": "52.0.11",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/udecode/plate/0a02e15d2f704bf60d28176b97c3761fe7aa4923/LICENSE",
+    "noticeSha256": "8b649e3569682298f50ed2048210e8f528034feb56f5d43a9977a7d60b0f7065"
+  },
+  {
+    "packages": [
+      {
+        "name": "esrecurse",
+        "version": "4.3.0",
+        "license": "BSD-2-Clause"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/estools/esrecurse/8ceb63797813d9ac69572a671b95cf58ffdf35b6/esrecurse.js",
+    "noticeSha256": "a40d855dd67eb27ae8eaa21420654f6cba7fff42125ce648d50d73e3313c058f"
+  },
+  {
+    "packages": [
+      {
+        "name": "filelist",
+        "version": "1.0.6",
+        "license": "Apache-2.0"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/mde/filelist/v1.0.6/LICENSE",
+    "noticeSha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a"
+  },
+  {
+    "packages": [
+      {
+        "name": "http_ece",
+        "version": "1.2.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/martinthomson/encrypted-content-encoding/0562510a30819f52424724a6fd5504becacd98a1/LICENSE",
+    "noticeSha256": "7d71f48c474da1de82fbdaac7fea5a1eaa41e4ac998dd44fd2897812812138d9"
+  },
+  {
+    "packages": [
+      {
+        "name": "imurmurhash",
+        "version": "0.1.4",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/jensyt/imurmurhash-js/0.1.4/README.md",
+    "noticeSha256": "e3e0a0db8254a57718e7439eca2cf268dceef3ab0da66c4a30b2d946e5ccc34a"
+  },
+  {
+    "packages": [
+      {
+        "name": "is-module",
+        "version": "1.0.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://registry.npmjs.org/is-module/-/is-module-1.0.0.tgz",
+    "noticeSha256": "901adfabb9aa37045ddbd42b6933d4ea57254081283079867f14756dbf86baeb"
+  },
+  {
+    "packages": [
+      {
+        "name": "is-regexp",
+        "version": "1.0.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/sindresorhus/is-regexp/v1.0.0/license",
+    "noticeSha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+  },
+  {
+    "packages": [
+      {
+        "name": "jake",
+        "version": "10.9.4",
+        "license": "Apache-2.0"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/jakejs/jake/v10.9.4/LICENSE",
+    "noticeSha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a"
+  },
+  {
+    "packages": [
+      {
+        "name": "jotai-x",
+        "version": "2.3.3",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/udecode/jotai-x/0b6fc4902b21124079fd04ea5c7754eb5d5b5871/LICENSE",
+    "noticeSha256": "5df218cd6bf499692e632d09c75078466f4e05f7c2ca2bf83febfc98c43a91a1"
+  },
+  {
+    "packages": [
+      {
+        "name": "keyv",
+        "version": "4.5.4",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://registry.npmjs.org/keyv/-/keyv-4.5.4.tgz",
+    "noticeSha256": "0d421ca196ad23157c914903a02c9070156c307fa449906f0f43c28cb7eb3396"
+  },
+  {
+    "packages": [
+      {
+        "name": "natural-compare",
+        "version": "1.4.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/litejs/natural-compare-lite/eec83eee67cfac84d6db30cdd65363f155673770/README.md",
+    "noticeSha256": "13ec5062be98b572f5fc393c69f3d75adef2a6ae3788a9fa802c74be6b13da08"
+  },
+  {
+    "packages": [
+      {
+        "name": "pg-types",
+        "version": "2.2.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/brianc/node-pg-types/d9d9dfb87eb50914043cbc178c301b7dd3b0c50d/README.md",
+    "noticeSha256": "2c8a6e1b7782f0ca241792868af742f1c281c9661f59ec36c9acf40381c86645"
+  },
+  {
+    "packages": [
+      {
+        "name": "pgpass",
+        "version": "1.0.5",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/hoegaarden/pgpass/4230ed5e417ba6044ea7eb80b7c33db9ec301398/README.md",
+    "noticeSha256": "492e56ee92e47d39ca91d60ef75f55b1104678fab8f09838206b61b43136e211"
+  },
+  {
+    "packages": [
+      {
+        "name": "react-compiler-runtime",
+        "version": "1.0.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/facebook/react/5c15c1cd3442f28044217703b5625f98c40042ee/LICENSE",
+    "noticeSha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+  },
+  {
+    "packages": [
+      {
+        "name": "react-remove-scroll-bar",
+        "version": "2.3.8",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.8.tgz",
+    "noticeSha256": "5bbdc2a8048cbd56ddb3c415fa49efe1b4d8aa162d543876af193bb9e5ba4f84"
+  },
+  {
+    "packages": [
+      {
+        "name": "remark-math",
+        "version": "6.0.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/remarkjs/remark-math/d5d0660b150810a535bbb07eac6cc96a4510aa24/license",
+    "noticeSha256": "cb992262f361a5359e6771c28740d33c7041e15332ae8537fae40538992591a9"
+  },
+  {
+    "packages": [
+      {
+        "name": "slate",
+        "version": "0.124.0",
+        "license": "MIT"
+      },
+      {
+        "name": "slate-dom",
+        "version": "0.124.0",
+        "license": "MIT"
+      },
+      {
+        "name": "slate-react",
+        "version": "0.124.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/ianstormtaylor/slate/f0258b58e7b0ab6357d253d8bc802abad2d0b353/License.md",
+    "noticeSha256": "5d96b4a20bfe2c1aeb3f3743306b1ac1415a374ff126c7c1962f419167d5802b"
+  },
+  {
+    "packages": [
+      {
+        "name": "slate-hyperscript",
+        "version": "0.100.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/ianstormtaylor/slate/a5f03871fe47398de062108e40457c7118762d71/License.md",
+    "noticeSha256": "5d96b4a20bfe2c1aeb3f3743306b1ac1415a374ff126c7c1962f419167d5802b"
+  },
+  {
+    "packages": [
+      {
+        "name": "toggle-selection",
+        "version": "1.0.6",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://registry.npmjs.org/toggle-selection/-/toggle-selection-1.0.6.tgz",
+    "noticeSha256": "4acf835d252f72568b41d8b0c96ec0e2b9b60844ac8193f26493ee98ed9cd1dd"
+  },
+  {
+    "packages": [
+      {
+        "name": "use-composed-ref",
+        "version": "1.4.0",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://registry.npmjs.org/use-composed-ref/-/use-composed-ref-1.4.0.tgz",
+    "noticeSha256": "540175f97c902a6fcc21ccdfc510ab2c2caeaf500729add26ba6319e3cef0f39"
+  },
+  {
+    "packages": [
+      {
+        "name": "zustand-x",
+        "version": "6.2.1",
+        "license": "MIT"
+      }
+    ],
+    "source": "https://raw.githubusercontent.com/udecode/zustand-x/78abd51d8e3414ed3ae8c9b577ec273e91bdab4b/LICENSE",
+    "noticeSha256": "5df218cd6bf499692e632d09c75078466f4e05f7c2ca2bf83febfc98c43a91a1"
+  }
+]

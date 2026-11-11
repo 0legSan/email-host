@@ -1,6 +1,6 @@
 services:
   proxy:
-    image: caddy:2.10.2-alpine
+    image: email-host/caddy:${EMAIL_HOST_VERSION:?Use a fixed release version}
     depends_on:
       web:
         condition: service_healthy

@@ -1,0 +1,2 @@
+# Preserve formatting in generated copies of upstream license notices.
+docs/third-party/SUPPLEMENTAL-NOTICES.txt -whitespace

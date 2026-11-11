@@ -3,9 +3,10 @@ set -Eeuo pipefail
 umask 077
 
 eh_directory=/opt/email-host
-eh_repository=https://github.com/0legSan/email-host
+eh_download_origin=https://emailhost.olegsan.tech
 eh_release=
 eh_mode=
+eh_requested_mode=
 eh_app_domain=
 eh_convex_domain=
 eh_site_domain=
@@ -36,7 +37,7 @@ eh_help() {
 Email Host: установка готовых Docker-образов.
 
   sudo bash install.sh [--release 0.1.0] [--directory /opt/email-host]
-  curl -fsSL https://emailhost.olegsan.tech/install.sh | sudo bash
+  curl -fsSL https://emailhost.olegsan.tech/install/service | sudo bash
 
 Мастер предложит вариант размещения и три домена. Подготовьте DNS A/AAAA,
 направленные на этот сервер. Не создавайте AAAA, если IPv6 не настроен.
@@ -46,7 +47,8 @@ Docker proxy. Nginx создаёт отдельный конфиг для под
 Первый вход owner@ваш-домен не требует существующего почтового ящика.
 Секреты сохраняются в закрытом credentials.txt, а не в выводе установщика.
 
---release VERSION   Использовать конкретный GitHub release vVERSION.
+--release VERSION   Использовать конкретный выпуск с сайта проекта.
+--mode MODE         standalone, traefik или nginx. Не меняет режим существующего инстанса.
 --directory PATH    Отдельный закрытый каталог установки.
 --help              Показать эту справку без изменений системы.
 HELP
@@ -64,6 +66,10 @@ eh_parse_arguments() {
         eh_directory=$2
         [[ $eh_directory == /* && $eh_directory != / && $eh_directory != *[!A-Za-z0-9_./-]* && $eh_directory != *..* ]] || eh_error 'Нужен отдельный абсолютный путь без пробелов и .. .'
         shift 2 ;;
+      --mode)
+        [[ $# -ge 2 ]] || eh_error 'После --mode нужен standalone, traefik или nginx.'
+        case $2 in standalone|traefik|nginx) ;; *) eh_error 'Неизвестный режим установки.' ;; esac
+        eh_requested_mode=$2; eh_mode=$2; shift 2 ;;
       --help|-h) eh_help; exit 0 ;;
       *) eh_error "Неизвестный аргумент: $1"; return 1 ;;
     esac
@@ -198,12 +204,14 @@ eh_choose_configuration() {
     [[ -z $eh_release || $eh_release == "$saved_release" ]] || eh_error 'Установщик не меняет версию существующего инстанса. Используйте отдельную процедуру обновления.'
     eh_release=$saved_release
     eh_mode=$(cat "$eh_directory/installation.mode")
+    [[ -z $eh_requested_mode || $eh_requested_mode == "$eh_mode" ]] || eh_error 'Нельзя менять режим существующего инстанса через --mode.'
     eh_app_domain=$(eh_env_value "$saved_config" APP_DOMAIN)
     eh_convex_domain=$(eh_env_value "$saved_config" CONVEX_DOMAIN)
     eh_site_domain=$(eh_env_value "$saved_config" CONVEX_SITE_DOMAIN)
     eh_valid_domain "$eh_app_domain" && eh_valid_domain "$eh_convex_domain" && eh_valid_domain "$eh_site_domain" || eh_error 'Сохранённые домены некорректны. Файлы не изменены.'
     eh_note 'Найдена существующая установка. Домены, версия и секреты будут сохранены.'
   else
+    if [[ -z $eh_mode ]]; then
     eh_note 'Где устанавливаем Email Host?'
     eh_note '  1. Пустой сервер, отдельный HTTPS proxy на портах 80 и 443.'
     eh_note '  2. Сервер с уже работающим Docker Traefik.'
@@ -213,6 +221,7 @@ eh_choose_configuration() {
       answer=$(eh_read 'Вариант' 1)
       case $answer in 1) eh_mode=standalone; break ;; 2) eh_mode=traefik; break ;; 3) eh_mode=nginx; break ;; *) eh_note 'Выберите 1, 2 или 3.' ;; esac
     done
+    fi
     eh_app_domain=$(eh_read_domain 'Домен приложения')
     eh_convex_domain=$(eh_read_domain 'Домен Convex' "convex.$eh_app_domain")
     eh_site_domain=$(eh_read_domain 'Домен HTTP actions' "convex-site.$eh_app_domain")
@@ -283,17 +292,16 @@ eh_prepare_release() {
     return
   fi
   eh_download_directory=$(mktemp -d /tmp/email-host-install.XXXXXXXX)
-  local tag url unpacked_version
-  if [[ -n $eh_release ]]; then tag="v$eh_release"; else
-    url=$(curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' \
-      --connect-timeout 15 --max-time 60 --max-filesize 1048576 --output /dev/null --write-out '%{url_effective}' "$eh_repository/releases/latest") || eh_error 'Не удалось загрузить release. Первый публичный выпуск может быть ещё не опубликован; системные изменения не выполнены.'
-    [[ $url == "$eh_repository/releases/tag/"* ]] || eh_error 'Не удалось определить опубликованный release. Возможно, первый выпуск ещё не опубликован.'
-    tag=${url##*/}; eh_release=${tag#v}
-    eh_valid_version "$eh_release" || eh_error 'GitHub release имеет неподдерживаемую версию.'
+  local url unpacked_version
+  if [[ -z $eh_release ]]; then
+    eh_https_download "$eh_download_origin/install/releases/latest" "$eh_download_directory/latest" || eh_error 'Не удалось загрузить версию. Первый установочный выпуск может быть ещё не опубликован; системные изменения не выполнены.'
+    eh_release=$(cat "$eh_download_directory/latest")
+    eh_valid_version "$eh_release" || eh_error 'Сервер вернул неподдерживаемую версию.'
   fi
-  eh_note "Загружаю выпуск $tag."
-  eh_https_download "$eh_repository/releases/download/$tag/email-host-deploy.tar.gz" "$eh_download_directory/email-host-deploy.tar.gz"
-  eh_https_download "$eh_repository/releases/download/$tag/email-host-deploy.tar.gz.sha256" "$eh_download_directory/archive.sha256"
+  eh_note "Загружаю выпуск $eh_release."
+  url="$eh_download_origin/install/releases/$eh_release"
+  eh_https_download "$url/email-host-deploy.tar.gz" "$eh_download_directory/email-host-deploy.tar.gz"
+  eh_https_download "$url/email-host-deploy.tar.gz.sha256" "$eh_download_directory/archive.sha256"
   eh_validate_archive "$eh_download_directory/email-host-deploy.tar.gz" "$eh_download_directory/archive.sha256"
   mkdir "$eh_download_directory/extracted"
   (ulimit -f 16384; tar --extract --gzip --file "$eh_download_directory/email-host-deploy.tar.gz" --directory "$eh_download_directory/extracted" --no-same-owner --no-same-permissions)
@@ -377,7 +385,6 @@ DOCKER_APT
 eh_prepare_configuration() {
   local image="ghcr.io/0legsan/email-host-api:$eh_release"
   if [[ ! -f $eh_directory/.env ]]; then
-    eh_run 'Загружаю образ настройки.' docker pull "$image"
     eh_run 'Генерирую закрытую конфигурацию.' docker run --rm --network none \
       --mount "type=bind,source=$eh_directory,target=/config" "$image" \
       bun deploy/public/bootstrap.mjs --output /config --app-domain "$eh_app_domain" \
@@ -392,6 +399,56 @@ eh_prepare_configuration() {
   [[ $(stat -c %a "$eh_directory/.env") == 600 && $(stat -c %a "$eh_directory/credentials.txt") == 600 ]] || eh_error 'Сгенерированные секреты должны иметь права 0600.'
 }
 
+eh_check_image_ids() {
+  local ids=$1 line config_digest descriptor_digest reference current count=0 seen=$'\n'
+  eh_images_missing=0
+  [[ -f $ids && ! -L $ids ]] || eh_error 'Выпуск не содержит список образов для архитектуры сервера. Package-only архив не подходит для установки.'
+  while IFS= read -r line || [[ -n $line ]]; do
+    [[ $line =~ ^(sha256:[a-f0-9]{64}),(sha256:[a-f0-9]{64})[[:space:]][[:space:]]([A-Za-z0-9][A-Za-z0-9./:_-]*)$ ]] || eh_error 'Некорректный список image IDs.'
+    config_digest=${BASH_REMATCH[1]}; descriptor_digest=${BASH_REMATCH[2]}; reference=${BASH_REMATCH[3]}
+    case $reference in
+      "ghcr.io/0legsan/email-host-api:$eh_release"|"ghcr.io/0legsan/email-host-web:$eh_release"|"email-host/postgres:$eh_release"|"email-host/convex-backend:$eh_release"|"email-host/caddy:$eh_release") ;;
+      *) eh_error 'В списке образов есть неизвестный reference.' ;;
+    esac
+    [[ $seen != *$'\n'"$reference"$'\n'* ]] || eh_error 'Повторяющийся образ в image IDs.'
+    seen+="$reference"$'\n'; count=$((count + 1))
+    if current=$(docker image inspect --format '{{.Id}}' "$reference" 2>/dev/null); then
+      [[ $current == "$config_digest" || $current == "$descriptor_digest" ]] || eh_error "Существующий tag $reference указывает на другой образ. Автоматическая замена запрещена."
+    else
+      eh_images_missing=1
+    fi
+  done < "$ids"
+  [[ $count -eq 5 ]] || eh_error 'В выпуске должны быть ровно пять runtime images.'
+  return 0
+}
+
+eh_prepare_images() {
+  local architecture ids url line checksum
+  case $(uname -m) in x86_64) architecture=linux-amd64 ;; aarch64|arm64) architecture=linux-arm64 ;; *) eh_error 'Неизвестная архитектура образов.' ;; esac
+  ids="$eh_directory/images-$architecture.ids"
+  grep -Eq "^[a-fA-F0-9]{64}  images-$architecture[.]ids$" "$eh_directory/SHA256SUMS" || eh_error 'Список image IDs не покрыт контрольными суммами выпуска.'
+  eh_check_image_ids "$ids"
+  if (( ! eh_images_missing )); then
+    eh_note 'Образы этой версии уже загружены и совпадают с image IDs.'
+    return 0
+  fi
+  [[ -n $eh_download_directory ]] || eh_download_directory=$(mktemp -d /tmp/email-host-install.XXXXXXXX)
+  url="$eh_download_origin/install/releases/$eh_release/$architecture"
+  eh_https_download "$url/email-host-images.tar.gz.sha256" "$eh_download_directory/images.sha256"
+  line=$(cat "$eh_download_directory/images.sha256")
+  [[ $line =~ ^([a-fA-F0-9]{64})[[:space:]][[:space:]]email-host-images.tar.gz$ ]] || eh_error 'Некорректная контрольная сумма архива образов.'
+  checksum=${BASH_REMATCH[1]}
+  eh_note "Загружаю готовые образы $architecture с $eh_download_origin."
+  curl --fail --progress-bar --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+    --connect-timeout 15 --max-time 1800 --retry 2 --max-filesize 2147483648 \
+    "$url/email-host-images.tar.gz" --output "$eh_download_directory/email-host-images.tar.gz"
+  [[ $(sha256sum "$eh_download_directory/email-host-images.tar.gz" | cut -d' ' -f1) == "$(printf '%s' "$checksum" | tr A-F a-f)" ]] || eh_error 'Контрольная сумма готовых образов не совпала.'
+  eh_run 'Загружаю проверенные образы в Docker.' docker load -i "$eh_download_directory/email-host-images.tar.gz"
+  eh_check_image_ids "$ids"
+  (( ! eh_images_missing )) || eh_error 'В Docker не появились все ожидаемые образы выпуска.'
+  return 0
+}
+
 eh_guard_project() {
   local containers container directory
   containers=$(docker ps -a --filter label=com.docker.compose.project=email-host --format '{{.ID}}')
@@ -402,6 +459,14 @@ eh_guard_project() {
   done <<< "$containers"
   if [[ ! -f $eh_directory/.env ]] && [[ -n $(docker volume ls --filter label=com.docker.compose.project=email-host --format '{{.Name}}') ]]; then
     eh_error 'Найдены существующие volumes проекта email-host без распознанной конфигурации. Установщик не будет использовать незнакомые данные.'
+  fi
+  if [[ ! -f $eh_directory/.env ]]; then
+    local volume
+    for volume in email-host_convex-postgres-data email-host_convex-data email-host_caddy-data email-host_caddy-config; do
+      if docker volume inspect "$volume" >/dev/null 2>&1; then
+        eh_error "Том $volume уже существует без распознанной конфигурации. Установщик не будет использовать незнакомые данные."
+      fi
+    done
   fi
 }
 
@@ -418,7 +483,7 @@ eh_choose_proxy_setting() {
 
 eh_prepare_proxy() {
   [[ ! -L $eh_directory/proxy.env ]] || eh_error 'proxy.env не должен быть символической ссылкой.'
-  [[ ! -f $eh_directory/proxy.env ]] || return
+  [[ ! -f $eh_directory/proxy.env ]] || return 0
   if [[ $eh_mode == standalone ]]; then
     command -v ss >/dev/null || eh_error 'Нужна утилита ss из iproute2 для проверки свободных 80/443.'
     if ss -H -ltn '( sport = :80 or sport = :443 )' | grep -q .; then
@@ -449,7 +514,13 @@ eh_prepare_proxy() {
     docker network inspect "$network" >/dev/null 2>&1 || eh_error 'Указанная Docker-сеть не существует.'
     printf '%s\n' "$networks" | grep -Fxq "$network" || eh_error 'Traefik не подключён к выбранной Docker-сети.'
     entrypoint=$(eh_choose_proxy_setting 'HTTPS entrypoint Traefik' "$entrypoints")
-    resolver=$(eh_choose_proxy_setting 'Существующий ACME certificate resolver' "$resolvers")
+    if [[ -n $resolvers ]]; then
+      resolver=$(eh_choose_proxy_setting 'Существующий ACME certificate resolver' "$resolvers")
+    else
+      eh_note 'ACME resolver не распознан. Для уже настроенных сертификатов Traefik оставьте поле пустым.'
+      resolver=$(eh_read 'ACME resolver или Enter для существующего TLS' '')
+      [[ -z $resolver ]] || eh_valid_proxy_name "$resolver" || eh_error 'Некорректное имя ACME resolver.'
+    fi
     printf "TRAEFIK_NETWORK='%s'\nTRAEFIK_ENTRYPOINT='%s'\nTRAEFIK_CERT_RESOLVER='%s'\n" "$network" "$entrypoint" "$resolver" > "$eh_directory/proxy.env"
   fi
 }
@@ -462,8 +533,7 @@ eh_compose() {
 
 eh_initialize_backend() {
   eh_run 'Проверяю Compose.' eh_compose config --quiet
-  eh_run 'Загружаю готовые образы.' eh_compose pull --quiet
-  eh_run 'Запускаю PostgreSQL и Convex.' eh_compose up -d --wait --wait-timeout 180 convex-postgres convex-backend
+  eh_run 'Запускаю PostgreSQL и Convex.' eh_compose up -d --pull never --wait --wait-timeout 180 convex-postgres convex-backend
   if [[ -z $(eh_env_value "$eh_directory/.env" CONVEX_SELF_HOSTED_ADMIN_KEY) ]]; then
     if [[ ! -s $eh_directory/.admin-key.pending ]]; then
       eh_note 'Создаю административный ключ Convex, без вывода ключа.'
@@ -475,17 +545,17 @@ eh_initialize_backend() {
     rm -f -- "$eh_directory/.admin-key.pending"
   fi
   if [[ ! -f $eh_directory/.functions-ready ]]; then
-    eh_run 'Задаю JWT issuer своего Convex.' eh_compose run --rm --no-deps -T --entrypoint bun api \
+    eh_run 'Задаю JWT issuer своего Convex.' eh_compose run --rm --pull never --no-deps -T --entrypoint bun api \
       node_modules/convex/bin/main.js env set CONVEX_AUTH_ISSUER "https://$eh_app_domain"
-    eh_run 'Задаю внутренний JWKS endpoint.' eh_compose run --rm --no-deps -T --entrypoint bun api \
+    eh_run 'Задаю внутренний JWKS endpoint.' eh_compose run --rm --pull never --no-deps -T --entrypoint bun api \
       node_modules/convex/bin/main.js env set CONVEX_AUTH_JWKS http://api:3001/api/auth/jwks
-    eh_run 'Публикую функции в новый локальный Convex.' eh_compose run --rm --no-deps -T --entrypoint bun api \
+    eh_run 'Публикую функции в новый локальный Convex.' eh_compose run --rm --pull never --no-deps -T --entrypoint bun api \
       node_modules/convex/bin/main.js deploy --typecheck disable --codegen disable < /dev/null
     printf '%s\n' "$eh_release" > "$eh_directory/.functions-ready"
   fi
-  eh_run 'Запускаю API и приложение.' eh_compose up -d --wait --wait-timeout 180 api web
+  eh_run 'Запускаю API и приложение.' eh_compose up -d --pull never --wait --wait-timeout 180 api web
   if [[ $eh_mode == standalone ]]; then
-    eh_run 'Запускаю HTTPS proxy.' eh_compose up -d --wait --wait-timeout 120 proxy
+    eh_run 'Запускаю HTTPS proxy.' eh_compose up -d --pull never --wait --wait-timeout 120 proxy
   fi
 }
 
@@ -602,6 +672,7 @@ eh_main() {
   touch "$eh_log"; chmod 0600 "$eh_log"
   eh_install_docker
   eh_guard_project
+  eh_prepare_images
   eh_prepare_configuration
   eh_prepare_proxy
   eh_initialize_backend
