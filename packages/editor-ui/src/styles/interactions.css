@@ -1,0 +1,404 @@
+.editor-ui-context-menu__separator {
+  height: 1px;
+  background: var(--editor-ui-border);
+  margin: 3px 0;
+}
+
+.editor-ui-context-menu__shortcut {
+  margin-left: auto;
+  color: var(--editor-ui-muted);
+  font-size: 11px;
+}
+
+.editor-ui-context-menu__indicator {
+  position: absolute;
+  left: 8px;
+  display: inline-grid;
+  width: 14px;
+  height: 14px;
+  place-items: center;
+}
+
+.editor-ui-context-menu__indicator svg,
+.editor-ui-context-menu__chevron {
+  width: 14px;
+  height: 14px;
+}
+
+.editor-ui-context-menu__sub-trigger {
+  padding-right: 6px;
+}
+
+.editor-ui-context-menu__chevron {
+  margin-left: auto;
+  color: var(--editor-ui-muted);
+}
+
+.editor-ui-block-menu__item {
+  width: 100%;
+  border: 0;
+  border-radius: calc(var(--editor-ui-radius) - 1px);
+  background: transparent;
+  color: var(--editor-ui-text);
+  padding: 4px 7px;
+  font-size: 12.5px;
+  line-height: 17px;
+  text-align: left;
+}
+
+.editor-ui-block-menu__button {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 0;
+  border-radius: calc(var(--editor-ui-radius) - 1px);
+  background: transparent;
+  color: var(--editor-ui-muted);
+}
+
+.editor-ui-block-menu__button:hover,
+.editor-ui-block-menu__button:focus-visible {
+  background: var(--editor-ui-panel-muted);
+  color: var(--editor-ui-text);
+  outline: 0;
+}
+
+.editor-ui-block-menu__button svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2;
+}
+
+.editor-ui-block-menu__item:hover,
+.editor-ui-block-menu__item:focus-visible {
+  background: var(--editor-ui-panel-muted);
+  outline: 0;
+}
+
+.editor-ui-block-menu__separator {
+  width: 1px;
+  height: 20px;
+  background: var(--editor-ui-border);
+  margin: 0 2px;
+}
+
+.editor-ui-block-menu__label {
+  padding: 3px 7px 2px;
+  color: var(--editor-ui-muted);
+  font-size: 10.5px;
+  font-weight: 760;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.editor-ui-block-drag-preview {
+  position: fixed;
+  z-index: 100;
+  top: -10000px;
+  left: -10000px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.editor-ui-block-drag-preview__item {
+  max-width: 260px;
+  overflow: hidden;
+  border: 1px solid var(--editor-ui-border);
+  border-radius: var(--editor-ui-radius);
+  background: var(--editor-ui-panel);
+  color: var(--editor-ui-text);
+  padding: 5px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgb(15 23 42 / 14%);
+}
+
+.editor-ui-block-drag-preview__item + .editor-ui-block-drag-preview__item {
+  margin-top: 3px;
+}
+
+.editor-ui-block-drag-preview--hidden {
+  display: none;
+}
+
+.editor-ui-drop-line {
+  position: absolute;
+  z-index: 9;
+  border-radius: 999px;
+  background: var(--editor-ui-accent);
+  pointer-events: none;
+}
+
+.editor-ui-drop-line--top,
+.editor-ui-drop-line--bottom {
+  right: 0;
+  left: 0;
+  height: 2px;
+}
+
+.editor-ui-drop-line--top {
+  top: -2px;
+}
+
+.editor-ui-drop-line--bottom {
+  bottom: -2px;
+}
+
+.editor-ui-drop-line--left,
+.editor-ui-drop-line--right {
+  top: 0;
+  bottom: 0;
+  width: 2px;
+}
+
+.editor-ui-drop-line--left {
+  left: -2px;
+}
+
+.editor-ui-drop-line--right {
+  right: -2px;
+}
+
+.editor-ui-block-selection {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--editor-ui-accent) 12%, transparent);
+  pointer-events: none;
+}
+
+.editor-ui-code-block {
+  overflow: auto;
+  border: 1px solid var(--editor-ui-border);
+  border-radius: 8px;
+  background: var(--editor-ui-panel-muted);
+  margin: 8px 0;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.editor-ui-code-block code {
+  background: transparent;
+  padding: 0;
+}
+
+.editor-ui-code-line {
+  min-height: 18px;
+}
+
+.editor-ui-table-block {
+  position: relative;
+  margin: 4px 0 6px;
+  overflow: visible;
+}
+
+.editor-ui-table-wrap {
+  position: relative;
+  width: fit-content;
+  min-width: 100%;
+  overflow-x: auto;
+}
+
+.editor-ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.editor-ui-table-toolbar {
+  position: absolute;
+  z-index: 80;
+  top: -29px;
+  left: 50%;
+  display: inline-flex;
+  width: max-content;
+  max-width: calc(100% - 8px);
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--editor-ui-border);
+  border-radius: var(--editor-ui-radius);
+  background: var(--editor-ui-panel);
+  padding: 3px;
+  box-shadow:
+    0 12px 32px rgb(15 23 42 / 14%),
+    0 3px 10px rgb(15 23 42 / 9%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -1px);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.editor-ui-table-block:hover .editor-ui-table-toolbar,
+.editor-ui-table-block:focus-within .editor-ui-table-toolbar,
+.editor-ui-table-toolbar:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.editor-ui-table-toolbar__button {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 0;
+  border-radius: calc(var(--editor-ui-radius) - 1px);
+  background: transparent;
+  color: var(--editor-ui-muted);
+}
+
+.editor-ui-table-toolbar__button:hover,
+.editor-ui-table-toolbar__button:focus-visible {
+  background: var(--editor-ui-panel-muted);
+  color: var(--editor-ui-text);
+  outline: 0;
+}
+
+.editor-ui-table-toolbar__button:disabled {
+  color: color-mix(in oklab, var(--editor-ui-muted) 44%, transparent);
+  pointer-events: none;
+}
+
+.editor-ui-table-toolbar__button svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2;
+}
+
+.editor-ui-table-toolbar__separator {
+  width: 1px;
+  height: 18px;
+  background: var(--editor-ui-border);
+  margin: 0 2px;
+}
+
+.editor-ui-table-cell {
+  min-width: 80px;
+  border: 1px solid var(--editor-ui-border);
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+th.editor-ui-table-cell {
+  background: var(--editor-ui-panel-muted);
+  font-weight: 760;
+}
+
+.editor-ui-media {
+  margin: 8px 0;
+}
+
+.editor-ui-media__frame,
+.editor-ui-media__file,
+.editor-ui-media__embed,
+.editor-ui-media__placeholder {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--editor-ui-border-strong);
+  border-radius: 8px;
+  background: var(--editor-ui-panel-muted);
+  color: var(--editor-ui-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.editor-ui-media__image {
+  display: block;
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.editor-ui-media__label {
+  color: var(--editor-ui-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.editor-ui-editor-container {
+  min-width: 0;
+  color: var(--editor-ui-text);
+}
+
+.editor-ui-editor-canvas {
+  min-width: 0;
+}
+
+.editor-ui-floating-toolbar {
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--editor-ui-border);
+  border-radius: var(--editor-ui-radius);
+  background: var(--editor-ui-panel);
+  padding: 4px;
+  box-shadow:
+    0 18px 42px rgb(15 23 42 / 16%),
+    0 4px 12px rgb(15 23 42 / 10%);
+}
+
+.editor-ui-floating-toolbar .editor-ui-editor__menu {
+  max-height: min(320px, calc(100vh - 160px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.editor-ui-static {
+  color: var(--editor-ui-text);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.editor-ui-static p {
+  margin: 0 0 8px;
+}
+
+.editor-ui-static h1,
+.editor-ui-static h2,
+.editor-ui-static h3,
+.editor-ui-static h4,
+.editor-ui-static h5,
+.editor-ui-static h6 {
+  margin: 14px 0 8px;
+  line-height: 1.25;
+}
+
+.editor-ui-static pre {
+  overflow: auto;
+  border: 1px solid var(--editor-ui-border);
+  border-radius: 8px;
+  background: var(--editor-ui-panel-muted);
+  padding: 10px 12px;
+}
+
+.editor-ui-static table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+}
+
+.editor-ui-static th,
+.editor-ui-static td {
+  border: 1px solid var(--editor-ui-border);
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+.editor-ui-editor__error {
+  border-top: 1px solid
+    color-mix(in oklab, var(--editor-ui-danger) 32%, var(--editor-ui-border));
+  color: var(--editor-ui-danger);
+  padding: 9px 12px;
+  font-size: 12px;
+  line-height: 18px;
+}

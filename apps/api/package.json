@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.14",
+    "@workspace/mail-agent": "workspace:*",
+    "hono": "^4.12.27",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10",
+    "@types/node": "^24",
+    "eslint": "^10",
+    "globals": "^17",
+    "typescript": "~6",
+    "typescript-eslint": "^8"
+  }
+}

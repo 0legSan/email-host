@@ -1,0 +1,112 @@
+name: email-host
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  convex-postgres:
+    image: postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193
+    environment:
+      POSTGRES_DB: email_host_convex
+      POSTGRES_USER: convex
+      POSTGRES_PASSWORD: ${CONVEX_POSTGRES_PASSWORD:?Run the setup wizard first}
+    volumes:
+      - convex-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U convex -d email_host_convex"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [database]
+    logging: *logging
+    restart: unless-stopped
+
+  convex-backend:
+    image: ghcr.io/convex/convex-backend@sha256:467964cc6af57ba3e757e3e6cb1fa09a1c577803a19f03f0f42c9c4b134b070c
+    depends_on:
+      convex-postgres:
+        condition: service_healthy
+    stop_grace_period: 10s
+    stop_signal: SIGINT
+    volumes:
+      - convex-data:/convex/data
+    environment:
+      APPLICATION_MAX_CONCURRENT_MUTATIONS: "16"
+      APPLICATION_MAX_CONCURRENT_NODE_ACTIONS: "16"
+      APPLICATION_MAX_CONCURRENT_QUERIES: "16"
+      APPLICATION_MAX_CONCURRENT_V8_ACTIONS: "16"
+      CONVEX_CLOUD_ORIGIN: ${CONVEX_PUBLIC_URL:?Set the public Convex origin}
+      CONVEX_SITE_ORIGIN: ${CONVEX_SITE_URL:?Set the public HTTP actions origin}
+      DISABLE_BEACON: "true"
+      DISABLE_METRICS_ENDPOINT: "true"
+      DO_NOT_REQUIRE_SSL: "1"
+      INSTANCE_NAME: ${CONVEX_INSTANCE_NAME:?Run the setup wizard first}
+      INSTANCE_SECRET: ${CONVEX_INSTANCE_SECRET:?Run the setup wizard first}
+      POSTGRES_URL: postgresql://convex:${CONVEX_POSTGRES_PASSWORD}@convex-postgres:5432
+      REDACT_LOGS_TO_CLIENT: "true"
+      RUST_LOG: info
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3210/version"]
+      interval: 5s
+      timeout: 5s
+      start_period: 15s
+      retries: 20
+    networks: [database, default]
+    logging: *logging
+    restart: unless-stopped
+
+  api:
+    image: ghcr.io/0legsan/email-host-api:${EMAIL_HOST_VERSION:?Use a fixed release version}
+    depends_on:
+      convex-backend:
+        condition: service_healthy
+    environment:
+      PORT: "3001"
+      CONVEX_SELF_HOSTED_URL: http://convex-backend:3210
+      CONVEX_SELF_HOSTED_ADMIN_KEY: ${CONVEX_SELF_HOSTED_ADMIN_KEY:-}
+      CONVEX_AUTH_ISSUER: ${CONVEX_AUTH_ISSUER:?Run the setup wizard first}
+      CONVEX_AUTH_JWKS: http://api:3001/api/auth/jwks
+      CONVEX_JWT_KEY_ID: ${CONVEX_JWT_KEY_ID:?Run the setup wizard first}
+      CONVEX_JWT_PRIVATE_KEY: ${CONVEX_JWT_PRIVATE_KEY:?Run the setup wizard first}
+      CONVEX_JWT_PUBLIC_JWK: ${CONVEX_JWT_PUBLIC_JWK:?Run the setup wizard first}
+      APP_BASE_URL: ${APP_BASE_URL:?Run the setup wizard first}
+      WEB_ORIGIN: ${WEB_ORIGIN:?Run the setup wizard first}
+      SESSION_SECRET: ${SESSION_SECRET:?Run the setup wizard first}
+      OWNER_EMAIL: ${OWNER_EMAIL:?Run the setup wizard first}
+      OWNER_PASSWORD: ${OWNER_PASSWORD:?Run the setup wizard first}
+      MAIL_CREDENTIAL_SECRET: ${MAIL_CREDENTIAL_SECRET:?Run the setup wizard first}
+      APP_RELEASE_VERSION: ${EMAIL_HOST_VERSION}
+    healthcheck:
+      test: ["CMD", "bun", "-e", "const r=await fetch('http://127.0.0.1:3001/health');if(!r.ok)process.exit(1)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 12
+    logging: *logging
+    restart: unless-stopped
+
+  web:
+    image: ghcr.io/0legsan/email-host-web:${EMAIL_HOST_VERSION:?Use a fixed release version}
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      CONVEX_PUBLIC_URL: ${CONVEX_PUBLIC_URL}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    logging: *logging
+    restart: unless-stopped
+
+volumes:
+  convex-data:
+  convex-postgres-data:
+
+networks:
+  database:
+    internal: true

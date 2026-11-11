@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="Попробуйте Email Host без регистрации. Настоящий интерфейс приложения, только вымышленные данные и имитация отправки."
+    />
+    <meta name="theme-color" content="#f7f9fb" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws://127.0.0.1:4176; frame-src 'self' blob: about:; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <link rel="icon" type="image/svg+xml" href="/icons/icon-v2.svg" />
+    <title>Демо Email Host</title>
+    <script
+      type="module"
+      src="../../../packages/mail-design/src/components/theme/bootstrap.ts"
+    ></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/demo/entry.tsx"></script>
+  </body>
+</html>

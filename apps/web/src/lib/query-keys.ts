@@ -1,0 +1,62 @@
+import type { MessagePageRequest } from "@/lib/api-client"
+
+export const queryKeys = {
+  session: () => ["session"] as const,
+  bootstrap: () => ["mail", "bootstrap"] as const,
+  accounts: () => ["mail", "accounts"] as const,
+  preferences: () => ["mail", "preferences"] as const,
+  profiles: () => ["mail", "profiles"] as const,
+  mailboxes: (accountId: string) => ["mail", "mailboxes", accountId] as const,
+  messageLists: () => ["mail", "messages"] as const,
+  messageList: (scope: Omit<MessagePageRequest, "cursor">) =>
+    [
+      "mail",
+      "messages",
+      {
+        accountId: scope.accountId,
+        accountIds: scope.accountIds,
+        searchMode: scope.searchMode,
+        path: scope.path,
+        specialUse: scope.specialUse,
+        customFolders: scope.customFolders,
+        q: scope.q,
+        from: scope.from,
+        to: scope.to,
+        subject: scope.subject,
+        after: scope.after,
+        before: scope.before,
+        hasAttachments: scope.hasAttachments,
+        unread: scope.unread,
+        flagged: scope.flagged,
+      },
+    ] as const,
+  messageListPage: (scope: MessagePageRequest) =>
+    [
+      "mail",
+      "messages",
+      {
+        accountId: scope.accountId,
+        accountIds: scope.accountIds,
+        searchMode: scope.searchMode,
+        path: scope.path,
+        specialUse: scope.specialUse,
+        customFolders: scope.customFolders,
+        q: scope.q,
+        from: scope.from,
+        to: scope.to,
+        subject: scope.subject,
+        after: scope.after,
+        before: scope.before,
+        hasAttachments: scope.hasAttachments,
+        unread: scope.unread,
+        flagged: scope.flagged,
+        cursor: scope.cursor ?? null,
+      },
+    ] as const,
+  messageDetails: () => ["mail", "message"] as const,
+  messageDetail: (messageId: string) => ["mail", "message", messageId] as const,
+  messageThreads: () => ["mail", "message-thread"] as const,
+  messageThread: (messageId: string) =>
+    ["mail", "message-thread", messageId] as const,
+  pushState: () => ["push", "state"] as const,
+}

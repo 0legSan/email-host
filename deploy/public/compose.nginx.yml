@@ -1,0 +1,8 @@
+services:
+  web:
+    ports:
+      - "127.0.0.1:${WEB_PORT:-18080}:80"
+  convex-backend:
+    ports:
+      - "127.0.0.1:${CONVEX_PORT:-13210}:3210"
+      - "127.0.0.1:${CONVEX_SITE_PORT:-13211}:3211"

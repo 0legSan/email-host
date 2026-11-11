@@ -1,0 +1,57 @@
+{
+  "id": "/",
+  "name": "Email Host",
+  "short_name": "Email Host",
+  "description": "Self-hosted mail workspace for reading, searching, and sending email.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#f7f9fb",
+  "theme_color": "#101214",
+  "categories": ["email", "productivity"],
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/mail?compose=new&mailto=%s"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Новое письмо",
+      "short_name": "Написать",
+      "description": "Создать новое письмо",
+      "url": "/mail?compose=new",
+      "icons": [
+        {
+          "src": "/icons/icon-192-v2.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192-v2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512-v2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512-v2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

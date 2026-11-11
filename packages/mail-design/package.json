@@ -1,0 +1,55 @@
+{
+  "name": "@workspace/mail-design",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && rm -rf dist && mkdir -p dist && cp -R .build/mail-design/src/. dist/ && cp src/styles.css dist/styles.css && rm -rf .build",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.44.0",
+    "@workspace/editor-ui": "workspace:*",
+    "@workspace/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^10",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "typescript": "~6",
+    "typescript-eslint": "^8"
+  },
+  "exports": {
+    "./locale": "./src/locale.ts",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth.d.ts",
+      "import": "./dist/auth.js"
+    },
+    "./compose": {
+      "types": "./dist/compose.d.ts",
+      "import": "./dist/compose.js"
+    },
+    "./settings": {
+      "types": "./dist/settings.d.ts",
+      "import": "./dist/settings.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  }
+}

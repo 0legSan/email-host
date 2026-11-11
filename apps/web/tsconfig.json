@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.sw.json" }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@workspace/editor-ui/*": ["../../packages/editor-ui/src/*"],
+      "@workspace/pwa/*": ["../../packages/pwa/src/*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"]
+    }
+  }
+}

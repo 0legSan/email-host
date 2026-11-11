@@ -1,0 +1,204 @@
+@import "@workspace/ui/globals.css";
+@import "@workspace/editor-ui/styles.css";
+
+@source "./**/*.{ts,tsx}";
+
+:root {
+  --mail-canvas: #f3f5f7;
+  --mail-canvas-strong: #eef1f4;
+  --mail-panel: #ffffff;
+  --mail-panel-subtle: #fbfcfd;
+  --mail-panel-muted: #f7f9fa;
+  --mail-text: #16191d;
+  --mail-text-strong: #20252a;
+  --mail-text-muted: #68727d;
+  --mail-text-subtle: #8a949e;
+  --mail-border: #d8dee5;
+  --mail-border-subtle: #e7ebef;
+  --mail-selected: #151719;
+  --mail-selected-foreground: #ffffff;
+  --mail-hover: #edf2f5;
+  --mail-positive: #1f8a70;
+  --mail-warning: #d99a19;
+  --mail-danger: #963828;
+}
+
+.dark {
+  --mail-canvas: #101214;
+  --mail-canvas-strong: #101214;
+  --mail-panel: #181b1f;
+  --mail-panel-subtle: #171a1d;
+  --mail-panel-muted: #20252a;
+  --mail-text: #f6f3ef;
+  --mail-text-strong: #eef2f4;
+  --mail-text-muted: #a7b0ba;
+  --mail-text-subtle: #8d98a3;
+  --mail-border: #30353a;
+  --mail-border-subtle: #2b3035;
+  --mail-selected: #f6f3ef;
+  --mail-selected-foreground: #111315;
+  --mail-hover: #242a30;
+  --mail-positive: #7ed8bf;
+  --mail-warning: #f4d58b;
+  --mail-danger: #ffb3a7;
+}
+
+@theme inline {
+  --color-mail-canvas: var(--mail-canvas);
+  --color-mail-canvas-strong: var(--mail-canvas-strong);
+  --color-mail-panel: var(--mail-panel);
+  --color-mail-panel-subtle: var(--mail-panel-subtle);
+  --color-mail-panel-muted: var(--mail-panel-muted);
+  --color-mail-text: var(--mail-text);
+  --color-mail-text-strong: var(--mail-text-strong);
+  --color-mail-text-muted: var(--mail-text-muted);
+  --color-mail-text-subtle: var(--mail-text-subtle);
+  --color-mail-border: var(--mail-border);
+  --color-mail-border-subtle: var(--mail-border-subtle);
+  --color-mail-selected: var(--mail-selected);
+  --color-mail-selected-foreground: var(--mail-selected-foreground);
+  --color-mail-hover: var(--mail-hover);
+  --color-mail-positive: var(--mail-positive);
+  --color-mail-warning: var(--mail-warning);
+  --color-mail-danger: var(--mail-danger);
+}
+
+@media (max-width: 1023px) {
+  .mobile-message-reader-header {
+    height: var(--mobile-message-reader-header-height, auto);
+    overflow: clip;
+    padding-inline: var(--mobile-message-reader-header-padding-inline, 1rem);
+    padding-top: var(--mobile-message-reader-header-padding-top, 0.75rem);
+    padding-bottom: var(--mobile-message-reader-header-padding-bottom, 1rem);
+  }
+
+  .mobile-message-reader-top-row {
+    margin-bottom: var(--mobile-message-reader-top-row-margin, 0.75rem);
+  }
+
+  .mobile-message-reader-back-button {
+    min-width: 2.25rem;
+    column-gap: var(--mobile-message-reader-back-button-gap, 0.25rem);
+    padding-inline: var(--mobile-message-reader-back-button-padding, 0.5rem);
+  }
+
+  .mobile-message-reader-back-label {
+    display: block;
+    max-width: var(--mobile-message-reader-back-label-width, 4rem);
+    overflow: clip;
+    opacity: var(--mobile-message-reader-back-label-opacity, 1);
+  }
+
+  .mobile-message-reader-compact-summary {
+    opacity: var(--mobile-message-reader-compact-opacity, 0);
+  }
+
+  .mobile-message-reader-details {
+    transform: translateY(var(--mobile-message-reader-details-offset, 0));
+    transform-origin: top;
+    opacity: var(--mobile-message-reader-details-opacity, 1);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .mobile-message-reader-header {
+    padding-inline: var(--mobile-message-reader-header-padding-inline, 1.5rem);
+    padding-top: var(--mobile-message-reader-header-padding-top, 1.25rem);
+  }
+}
+
+:root {
+  --mail-accent: #167450;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #e7f5ed;
+  --mail-accent-text: #167450;
+}
+.dark {
+  --mail-accent: #a0e5c4;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #153d2d;
+  --mail-accent-text: #a0e5c4;
+}
+
+:root[data-mail-accent="blue"] {
+  --mail-accent: #245ac2;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #eaf0ff;
+  --mail-accent-text: #245ac2;
+}
+.dark[data-mail-accent="blue"] {
+  --mail-accent: #adcaff;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #192f56;
+  --mail-accent-text: #adcaff;
+}
+
+:root[data-mail-accent="violet"] {
+  --mail-accent: #7140bd;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #f2ebfc;
+  --mail-accent-text: #7140bd;
+}
+.dark[data-mail-accent="violet"] {
+  --mail-accent: #d6baff;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #35224d;
+  --mail-accent-text: #d6baff;
+}
+
+:root[data-mail-accent="orange"] {
+  --mail-accent: #a64c0b;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #fff0e3;
+  --mail-accent-text: #a64c0b;
+}
+.dark[data-mail-accent="orange"] {
+  --mail-accent: #ffc08a;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #492d19;
+  --mail-accent-text: #ffc08a;
+}
+
+:root[data-mail-accent="rose"] {
+  --mail-accent: #b32e63;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #fdebf2;
+  --mail-accent-text: #b32e63;
+}
+.dark[data-mail-accent="rose"] {
+  --mail-accent: #ffb1d0;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #4c2132;
+  --mail-accent-text: #ffb1d0;
+}
+
+:root[data-mail-accent="graphite"] {
+  --mail-accent: #4e5968;
+  --mail-accent-foreground: #fff;
+  --mail-accent-soft: #edf0f4;
+  --mail-accent-text: #4e5968;
+}
+.dark[data-mail-accent="graphite"] {
+  --mail-accent: #c5ceda;
+  --mail-accent-foreground: #111820;
+  --mail-accent-soft: #2a3039;
+  --mail-accent-text: #c5ceda;
+}
+
+:root,
+.dark {
+  --primary: var(--mail-accent);
+  --primary-foreground: var(--mail-accent-foreground);
+  --ring: var(--mail-accent-text);
+  --mail-selected: var(--mail-accent);
+  --mail-selected-foreground: var(--mail-accent-foreground);
+}
+@theme inline {
+  --color-mail-accent: var(--mail-accent);
+  --color-mail-accent-foreground: var(--mail-accent-foreground);
+  --color-mail-accent-soft: var(--mail-accent-soft);
+  --color-mail-accent-text: var(--mail-accent-text);
+}
+:focus-visible {
+  outline-color: var(--mail-accent-text);
+}

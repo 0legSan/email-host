@@ -1,0 +1,38 @@
+# Logs
+logs
+backups
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# env files (can opt-in for committing if needed)
+.env*
+.server-password
+
+# turbo
+.turbo
+.release-public/
+
+# Editor directories and files
+.os-code/
+.terminal-hub/
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# typescript
+*.tsbuildinfo

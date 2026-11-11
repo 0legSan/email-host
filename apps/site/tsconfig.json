@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client", "node"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": ["../web/src/*"],
+      "@workspace/mail-design": ["../../packages/mail-design/src/index.ts"],
+      "@workspace/mail-design/*": ["../../packages/mail-design/src/*"],
+      "@workspace/editor-ui/*": ["../../packages/editor-ui/src/*"],
+      "@workspace/pwa/*": ["../../packages/pwa/src/*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"],
+      "@workspace/pwa/react": ["./src/demo/pwa-adapter.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts", "../web/src/types"]
+}

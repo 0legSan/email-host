@@ -1,0 +1,34 @@
+services:
+  web:
+    networks: [default, proxy]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:?Select the existing Traefik network}
+      - traefik.http.routers.email-host-web.rule=Host(`${APP_DOMAIN}`)
+      - traefik.http.routers.email-host-web.entrypoints=${TRAEFIK_ENTRYPOINT:?Select the HTTPS entrypoint}
+      - traefik.http.routers.email-host-web.tls=true
+      - traefik.http.routers.email-host-web.tls.certresolver=${TRAEFIK_CERT_RESOLVER:?Select the certificate resolver}
+      - traefik.http.routers.email-host-web.service=email-host-web
+      - traefik.http.services.email-host-web.loadbalancer.server.port=80
+  convex-backend:
+    networks: [database, default, proxy]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK}
+      - traefik.http.routers.email-host-convex.rule=Host(`${CONVEX_DOMAIN}`)
+      - traefik.http.routers.email-host-convex.entrypoints=${TRAEFIK_ENTRYPOINT}
+      - traefik.http.routers.email-host-convex.tls=true
+      - traefik.http.routers.email-host-convex.tls.certresolver=${TRAEFIK_CERT_RESOLVER}
+      - traefik.http.routers.email-host-convex.service=email-host-convex
+      - traefik.http.services.email-host-convex.loadbalancer.server.port=3210
+      - traefik.http.routers.email-host-actions.rule=Host(`${CONVEX_SITE_DOMAIN}`)
+      - traefik.http.routers.email-host-actions.entrypoints=${TRAEFIK_ENTRYPOINT}
+      - traefik.http.routers.email-host-actions.tls=true
+      - traefik.http.routers.email-host-actions.tls.certresolver=${TRAEFIK_CERT_RESOLVER}
+      - traefik.http.routers.email-host-actions.service=email-host-actions
+      - traefik.http.services.email-host-actions.loadbalancer.server.port=3211
+
+networks:
+  proxy:
+    external: true
+    name: ${TRAEFIK_NETWORK}

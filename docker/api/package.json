@@ -1,0 +1,10 @@
+{
+  "name": "email-host-convex-api-runtime",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "bun@1.3.5",
+  "workspaces": ["apps/api", "packages/mail-agent", "packages/pwa"],
+  "dependencies": {
+    "convex": "1.42.3"
+  }
+}

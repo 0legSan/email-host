@@ -1,0 +1,38 @@
+{
+  "name": "@workspace/mail-agent",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@workspace/pwa": "workspace:*",
+    "convex": "1.42.3",
+    "hono": "^4.12.27",
+    "imapflow": "^1.4.3",
+    "jose": "6.2.5",
+    "mailparser": "^3.9.12",
+    "nodemailer": "^9.0.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10",
+    "@types/mailparser": "^3.4.6",
+    "@types/node": "^24",
+    "@types/nodemailer": "^8.0.1",
+    "eslint": "^10",
+    "globals": "^17",
+    "typescript": "~6",
+    "typescript-eslint": "^8"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts",
+    "./http": "./src/http/index.ts",
+    "./mail-engine": "./src/mail-engine/index.ts"
+  }
+}

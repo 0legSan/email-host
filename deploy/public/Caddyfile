@@ -1,0 +1,11 @@
+{$APP_DOMAIN} {
+    reverse_proxy web:80
+}
+
+{$CONVEX_DOMAIN} {
+    reverse_proxy convex-backend:3210
+}
+
+{$CONVEX_SITE_DOMAIN} {
+    reverse_proxy convex-backend:3211
+}

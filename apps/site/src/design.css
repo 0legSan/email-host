@@ -1,0 +1,4 @@
+@import "@workspace/mail-design/styles.css";
+
+/* The site renders the mail app in its demo; scan that consumer's classes too. */
+@source "../../web/src/**/*.{ts,tsx}";

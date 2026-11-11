@@ -1,0 +1,27 @@
+services:
+  proxy:
+    image: caddy:2.10.2-alpine
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set the application domain}
+      CONVEX_DOMAIN: ${CONVEX_DOMAIN:?Set the Convex domain}
+      CONVEX_SITE_DOMAIN: ${CONVEX_SITE_DOMAIN:?Set the HTTP actions domain}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+
+volumes:
+  caddy-data:
+  caddy-config:
