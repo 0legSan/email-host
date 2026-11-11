@@ -8,6 +8,12 @@ Email Host is a web mail client that runs on your server. You bring existing IMA
 
 Yes. Open the [English demo](https://emailhost.olegsan.tech/demo/?lang=en) or [Russian demo](https://emailhost.olegsan.tech/demo/?lang=ru). It uses the real interface with fictional local data. No real messages are sent, no real mailbox is connected, and the demo is not a backend performance benchmark.
 
+## What hardware and architectures were checked?
+
+The release provides Linux amd64 and arm64 bundles. The isolated Ubuntu 24.04 Docker lab ran ARM64 natively and AMD64 executables under emulation on an ARM host. Its application Docker daemon had a 2800 MiB memory limit and 3 CPUs; the separate wizard runner had 768 MiB and 2 CPUs. Those limits describe the test environment, not a supported minimum or capacity benchmark for real mailboxes. Native AMD64 host boot, mailbox sizes and long-running workloads remain unverified. Allow additional disk space for mail, database growth and backups.
+
+One runtime bundle is about 470 to 485 MiB compressed, depending on architecture. The installer downloads only the matching bundle. Docker expands its layers, so the download size is not the application's total disk requirement.
+
 ## Why does the installer ask for three domains?
 
 The application, self-hosted Convex backend and Convex HTTP actions use separate public origins. Point all three DNS names to the installation server. The wizard proposes the two service names from the application name. Every name needs working HTTPS. See [the setup guide](installation.en.md).
