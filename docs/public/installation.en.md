@@ -1,6 +1,6 @@
-# Install a beta on your server
+# Install Email Host on your server
 
-The installer uses ready images and a short terminal wizard. Read the release notes and [detailed installation status](../installation.md) for the architectures and environments verified for your version. This beta does not yet provide a verified general upgrade or backup restoration procedure.
+The installer uses ready images and a short terminal wizard. Read the release notes and [detailed installation status](../installation.md) for the architectures and environments verified for your version. Stable `0.1.0` is the current application release. General upgrade and backup restoration procedures are not yet verified.
 
 ## Prepare the server
 
@@ -55,4 +55,4 @@ A retry does not change an existing installation's release, domains or proxy mod
 
 Protect encrypted copies of the configuration and keys together with persistent PostgreSQL/Convex data outside this server. Images alone do not restore mail or settings. The loss of `MAIL_CREDENTIAL_SECRET` prevents decrypting saved mail-provider credentials.
 
-Do not run `docker compose down -v` for an update; it deletes volumes. There is no verified general backup restoration, upgrade or rollback procedure in this beta. The [FAQ](faq.md), [security reporting guide](../../SECURITY.md), and [third-party notices](../../THIRD_PARTY_NOTICES.md) cover the remaining common questions.
+Do not run `docker compose down -v` for an update; it deletes volumes. There is no verified general backup restoration, upgrade or rollback procedure for this release. The [FAQ](faq.md), [security reporting guide](../../SECURITY.md), and [third-party notices](../../THIRD_PARTY_NOTICES.md) cover the remaining common questions.

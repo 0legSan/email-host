@@ -20,7 +20,7 @@ Email Host is a mail client. It connects accounts you already have with a mail p
 
 ## Install on your server
 
-The first installation release, `0.1.0-beta.2`, is a **beta**. Use an isolated server first and read the [verification limits and requirements](docs/public/installation.en.md). Backup restoration and application upgrades do not yet have a verified end-to-end procedure.
+The current stable application release is **`0.1.0`**. Read the [installation requirements and verification scope](docs/public/installation.en.md) before deploying. Backup restoration and application upgrades do not yet have a verified end-to-end procedure.
 
 Prepare a Linux server and three DNS names pointing to it, for example:
 

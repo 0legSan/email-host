@@ -1,6 +1,6 @@
 # Upstream source references
 
-Checked on 2026-11-11. These references accompany the unmodified upstream components in Email Host beta. Image content digests and the selected architecture are recorded separately in each release provenance. Source references are not a replacement for keeping applicable licenses and copyright notices.
+Checked on 2026-11-11. These references accompany the unmodified upstream components in Email Host releases. Image content digests and the selected architecture are recorded separately in each release provenance. Source references are not a replacement for keeping applicable licenses and copyright notices.
 
 | Distributed component | Source and build information |
 | --- | --- |

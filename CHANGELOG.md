@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0, 2026-11-11
+
+Stable application release. Promotes the tested beta runtime without application code or dependency changes. New fixed-version bundles use `0.1.0`; the previous beta remains available.
+
+Installation verification and unverified maintenance procedures remain documented separately in [the installation guide](docs/installation.md). Existing installations are not automatically upgraded by this release.
+
 ## 0.1.0-beta.2, 2026-11-11
 
 First public installation beta.

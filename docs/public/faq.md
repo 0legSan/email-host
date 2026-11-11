@@ -42,7 +42,7 @@ Yes, use the same installation directory and configuration. The installer is des
 
 ## Does a repeated install update the app?
 
-No. There is no verified general upgrade, rollback or backup restoration procedure in this beta. Keep encrypted copies of configuration and keys, and protect persistent database/runtime volumes. A container image alone is not a data backup. Never use `docker compose down -v` as an update command because it deletes data volumes.
+No. There is no verified general upgrade, rollback or backup restoration procedure for this release. Keep encrypted copies of configuration and keys, and protect persistent database/runtime volumes. A container image alone is not a data backup. Never use `docker compose down -v` as an update command because it deletes data volumes.
 
 ## Does offline access keep all my mail?
 
@@ -54,7 +54,7 @@ OAuth connection is disabled in this version. Connect accounts through IMAP and 
 
 ## Is it ready for critical mail?
 
-This is an early beta. Use an isolated installation first, read the [current verification scope](../installation.md), and test your own provider's reading and sending. Installation checks do not establish IMAP/SMTP compatibility for every provider, server reboot behavior, recovery readiness, or an availability guarantee.
+The current application release is stable `0.1.0`. Before moving critical mail, use an isolated installation first, read the [current verification scope](../installation.md), and test your own provider's reading and sending. Installation checks do not establish IMAP/SMTP compatibility for every provider, server reboot behavior, recovery readiness, or an availability guarantee.
 
 ## Is the whole distribution MIT?
 

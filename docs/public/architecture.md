@@ -56,3 +56,7 @@ The public installer creates a separate Compose project, generates new secrets, 
 A release contains ready images in architecture-specific Docker-save archives. The server downloads them from the project website, verifies checksums and image identities, and loads them locally. The release builder does not publish files or update a running server.
 
 Start with [installation](../installation.md), [contributor instructions](../../CONTRIBUTING.md) and [agent rules](../../AGENTS.md). Test new deployment, schema and restore work against an isolated instance with synthetic data. Do not use a live user's database as a development fixture.
+
+## Release status and verification
+
+`0.1.0` is the stable application release, based on the maintainer's operating experience. Installation verification and service maintenance have their own documented scope. Read `docs/installation.md` for exact tested environments and unverified procedures. A release label does not establish a test result. Keep those facts visible without changing the application's release status solely because one installation or recovery scenario remains unverified.
